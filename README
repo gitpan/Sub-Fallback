@@ -1,7 +1,7 @@
 Sub::Fallback
 =============
 
-Fall back to subs in stack.
+Fall back to subs in stack
 
 INSTALLATION
 
@@ -16,7 +16,7 @@ SCRIPTS
 
 bin/fallback.pl
 
-Interface to Sub::Fallback that falls back to subs.
+Falls back to subs.
 
 LICENSE
 

@@ -7,4 +7,3 @@ requires:
 distribution_type: module
 license: perl
 dist_abstract: Fall back to subs in stack
-dist_author: Steven Schubiger

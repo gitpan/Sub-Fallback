@@ -1,16 +1,15 @@
-#!/usr/bin/perl
+#! /usr/local/bin/perl
 
 package Recursion;
 
 use strict;
 use warnings; 
 no warnings 'recursion';
-
 use Sub::Fallback qw(fallback);
 
-$Sub::Fallback::Debug = 1;
+$Sub::Fallback::DEBUG = 1;
 
-our $i;
+my $i;
 
 init();
 
