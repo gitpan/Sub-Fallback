@@ -1,6 +1,6 @@
 package Sub::Fallback;
 
-$VERSION = '0.04';
+$VERSION = '0.06';
 @EXPORT_OK = qw(fallback);
 
 use strict;
