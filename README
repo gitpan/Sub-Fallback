@@ -1,0 +1,28 @@
+Sub::Fallback
+=============
+
+Fall back to subs in stack frame.
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+   
+SCRIPTS
+
+bin/fallback.pl
+
+Interface to Sub::Fallback that falls back to subs.
+
+LICENSE
+
+This program is free software;
+you may redistribute it and/or modify it under the same terms as Perl itself.
+
+AUTHOR
+
+Steven Schubiger

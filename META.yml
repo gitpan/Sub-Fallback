@@ -1,0 +1,10 @@
+--- #YAML:1.0
+module_name: Sub-Fallback
+dist_version_from: lib/Sub/Fallback.pm
+installdirs: site
+requires:
+    Exporter: 0 
+distribution_type: module
+license: perl
+dist_abstract: fall back to subs in stack frame.
+dist_author: Steven Schubiger
