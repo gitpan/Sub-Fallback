@@ -1,6 +1,6 @@
 package Sub::Fallback;
 
-$VERSION = '0.03';
+$VERSION = '0.04';
 @EXPORT_OK = qw(fallback);
 
 use strict;
@@ -17,7 +17,7 @@ sub fallback {
       if ($sec && $sec !~ /\d/);
            
     $stack_frames++ while (caller( $stack_frames ));
-       
+
     my $sub = (caller( --$stack_frames - $fallback ))[3];
        
     sleep $sec                     if $sec;
@@ -52,8 +52,8 @@ Sub::Fallback - Fall back to subs in stack
  }
 
  sub loop { 
-     fallback(0) if $i == 20;    # falls back to init()
-     fallback(1,1);              # falls back to increase() in 1 sec
+     fallback(0)       if $i == 20;    # falls back to init()
+     fallback(1,1);                    # falls back to increase() in 1 sec
  }
 
 =head1 FUNCTIONS

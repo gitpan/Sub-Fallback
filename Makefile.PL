@@ -1,6 +1,5 @@
 use ExtUtils::MakeMaker;
 WriteMakefile(
-    DISTNAME     => 'Sub-Fallback',
     NAME         => 'Sub::Fallback',
     VERSION_FROM => 'lib/Sub/Fallback.pm',
     PREREQ_PM    => { Exporter => 0 },
