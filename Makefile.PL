@@ -1,5 +1,4 @@
 use ExtUtils::MakeMaker;
-
 WriteMakefile(
     DISTNAME     => 'Sub-Fallback',
     NAME         => 'Sub::Fallback',

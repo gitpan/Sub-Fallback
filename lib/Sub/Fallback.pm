@@ -1,45 +1,27 @@
-# $Id: Fallback.pm,v 0.01 2004/01/21 14:27:14 sts Exp $
-
 package Sub::Fallback;
 
-use 5.006;
-use base qw(Exporter);
+$VERSION = '0.02';
+@EXPORT_OK = qw(fallback);
+
 use strict;
-use warnings;
-no warnings 'recursion';
-
-our $VERSION = '0.01';
-
-our @EXPORT_OK = qw(fallback);
-
-our ($Debug, $stack_frames);
+use vars qw($Debug $stack_frames);
+use base qw(Exporter);
+use Carp qw(carp croak);
 
 $stack_frames = 0;
 
-sub carp {
-    require Carp;
-    &Carp::carp;
-}
-
-sub croak {
-    require Carp;
-    &Carp::croak;
-}
-
 sub fallback {
-    my $fallback = $_[0] || 0;
-    my $sec = $_[1];
-    croak q~usage: fallback (stack frame, [sec])~
+    my $fallback = shift || 0;
+    my $sec = shift;
+    croak 'usage: fallback(stack frame, [sec])'
       if $sec && $sec !~ /\d/;
-      
-    while (caller($stack_frames)) { $stack_frames++ }
-    
+           
+    while (caller($stack_frames)) { $stack_frames++ }    
     my $sub = (caller(--$stack_frames - $fallback))[3];
-    
+       
     sleep $sec if $sec;
-    carp qq~falling back to $sub~ if $Debug; 
-    
-    goto &{$sub};
+    carp "falling back to $sub" if $Debug;       
+    goto &$sub;
 } 
 
 1;
@@ -47,13 +29,15 @@ __END__
 
 =head1 NAME
 
-Sub::Fallback - fall back to subs in stack frame.
+Sub::Fallback - Fall back to subs in stack
 
 =head1 SYNOPSIS
 
- use Sub::Fallback q(fallback);
+ use Sub::Fallback qw(fallback);
  
  # do NOT use this code
+ 
+ init();
  
  sub init {
      $i = 0;
@@ -67,7 +51,7 @@ Sub::Fallback - fall back to subs in stack frame.
     
  sub loop { 
      fallback(0) if $i == 20;    # falls back to init()
-     fallback(1, 1);             # falls back to increase() in 1 sec
+     fallback(1,1);              # falls back to increase() in 1 sec
  }
 
 =head1 FUNCTIONS
@@ -76,12 +60,12 @@ Sub::Fallback - fall back to subs in stack frame.
 
 Falls back to previously executed subs in stack frame.
 
- fallback (stack frame, [sec]);
+ fallback(stack frame, [sec]);
  
-Unlike perl's caller, C<fallback()> takes an absolute integer as 
+Unlike perl's C<caller>, C<fallback()> takes an absolute integer as 
 level indicator. 0 does always refer to the first stack frame.
-C<fallback(0)> will thus fall back to the first executed sub. A 
-sleep interval (sec) before falling back may be provided.
+C<fallback(0)> will thus fall back to the first sub within the stack. 
+A sleep interval (sec) before falling back may be provided.
 
 =head1 EXPORT
 
@@ -91,5 +75,9 @@ C<fallback()> is exportable.
 
 Speed may become an issue since a counter has to be incremented to
 keep count of stack frames.
+
+=head1 SEE ALSO
+
+L<perlfunc/caller>
 
 =cut
